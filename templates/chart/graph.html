@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <div class="card " style="width:100% ">
+        <input type="hidden" id="hdnSession" value="{{ request.session.months }}" />
+        <div id="myfirstchart"></div>
+    </div>
+
+
+    <script>
+        const monthNames = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+    
+        var data = JSON.parse("{{data|escapejs}}");
+        var jan_am;
+        var feb_am;
+        var mar_am;
+        var apr_am;
+        var may_am;
+        var jun_am;
+        var jul_am;
+        var aug_am;
+        var sep_am;
+        var oct_am;
+        var nov_am;
+        var dec_am;
+    
+        for (nabiza in data) {
+            if (data[nabiza].month == 1) {
+                jan_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 2) {
+                feb_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 3) {
+                mar_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 4) {
+                apr_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 5) {
+                may_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 6) {
+                jun_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 7) {
+                jul_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 8) {
+                aug_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 9) {
+                sep_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 10) {
+                oct_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 11) {
+                nov_am = +data[nabiza].sum
+            }
+            if (data[nabiza].month == 12) {
+                dec_am = +data[nabiza].sum
+            }
+        }
+        console.log(apr_am)
+        console.log(may_am)
+        Morris.Area({
+            element: 'myfirstchart',
+            data: [{
+                y: 1,
+                a: jan_am
+            }, {
+                y: 2,
+                a: feb_am
+            }, {
+                y: 3,
+                a: mar_am
+            }, {
+                y: 4,
+                a: apr_am
+            }, {
+                y: 5,
+                a: may_am
+            }, {
+                y: 6,
+                a: jun_am
+    
+            }, {
+                y: 7,
+                a: jul_am
+            }, {
+                y: 8,
+                a: aug_am
+            }, {
+                y: 9,
+                a: sep_am
+            }, {
+                y: 10,
+                a: oct_am
+            }, {
+                y: 11,
+                a: nov_am
+            }, {
+                y: 12,
+                a: dec_am
+            }],
+            xkey: 'y',
+            parseTime: false,
+            ykeys: ['a'],
+            xLabelFormat: function (x) {
+                var index = parseInt(x.src.y);
+                // console.log(monthNames[index]);
+                return monthNames[index];
+            },
+            xLabels: "month",
+            labels: ['Expenses'],
+            lineColors: ['#a0d0e0', '#3dbeee'],
+            hideHover: 'auto'
+    
+        });
+    
+    
+        </script>
+    

@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Expense Manager {% endblock title %}
+{% block content %}
+
+<div class="pcoded-content ">
+    <div class="pcoded-inner-content ">
+        <div class="main-body ">
+            <div class="page-wrapper ">
+                {% include 'messages.html' %}
+                <div class="page-body ">
+                    <div class="row ">
+                        <!-- order-card start -->
+                        <div class="col-md-6 col-xl-3 ">
+                            <div class="card bg-c-blue order-card ">
+                                <div class="card-block ">
+                                    <h6 class="m-b-20 ">About Today<span style="float: right;">{{today}}</span>
+                                    </h6>
+                                    <h2 class="text-right "><i class="ti-shopping-cart f-left "></i><span>{{day}}</span>
+                                    </h2>
+                                    <p class="m-b-0 "><i class="ti-wallet f-left "></i><span class="f-right ">{{dayInc}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 ">
+                            <div class="card bg-c-green order-card ">
+                                <div class="card-block ">
+                                    <h6 class="m-b-20 ">This week<span style="float: right;">7 Days</span></h6>
+                                    <h2 class="text-right "><i
+                                            class="ti-shopping-cart f-left "></i><span>{{weekexpenses}}</span></h2>
+                                    <p class="m-b-0 "><i class="ti-wallet f-left "></i><span class="f-right ">{{weekInc}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 ">
+                            <div class="card bg-c-yellow order-card ">
+                                <div class="card-block ">
+                                    <h6 class="m-b-20">This Month <span
+                                            style="float: right;">{{today_date.month}}th</span></h6>
+                                    <h2 class="text-right "><i
+                                            class="ti-shopping-cart f-left "></i><span>{{month}}</span></h2>
+                                    <p class="m-b-0 "><i class="ti-wallet f-left "></i><span class="f-right ">{{monInc}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 ">
+                            <div class="card bg-c-pink order-card ">
+                                <div class="card-block ">
+                                    <h6 class="m-b-20 ">This Year<span style="float: right;">{{today_date.year}}</span>
+                                    </h6>
+                                    <h2 class="text-right "><i
+                                            class="ti-shopping-cart f-left "></i><span>{{year}}</span></h2>
+                                    <p class="m-b-0 "><i class="ti-wallet f-left "></i><span class="f-right ">{{yrInc}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- order-card end -->
+
+                        <!-- statustic and process start -->
+                        <div class="col-lg-8 col-md-12 ">
+                            <div class="card ">
+                                <div class="card-header ">
+                                    <h5>Monthly Expenses</h5>
+                                    <div class="card-header-right ">
+                                        <ul class="list-unstyled card-option ">
+                                            <li><i class="fa fa-chevron-left "></i></li>
+                                            <li><i class="fa fa-window-maximize full-card "></i></li>
+                                            <li><i class="fa fa-minus minimize-card "></i></li>
+                                            <li><i class="fa fa-refresh reload-card "></i></li>
+                                            <li><i class="fa fa-times close-card "></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block ">
+                                    {% include 'chart/graph.html' %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 ">
+                            <div class="card ">
+                                <div class="card-header ">
+                                    <h5>Category Summary</h5>
+                                </div>
+                                <div class="card-block ">
+                                    <div class="row justify-content-center m-t-15 " style="min-height: 360px;">
+                                        {% include 'chart/pie-chart.html' %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- statustic and process end -->
+                        <!-- tabs card start -->
+                        <div class="col-sm-12 ">
+                            <div class="card tabs-card ">
+                                <div class="card-block p-0 ">
+                                    <!-- Nav tabs -->
+                                    <div class="nav nav-tabs md-tabs " style="padding-left: 40%;" role="tablist ">
+                                        <div>
+                                            <h3 class="nav-link active"><i class="fa fa-home "></i>
+                                                This Month Expense
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content card-block ">
+                                        <div class="tab-pane active " id="home3 " role="tabpanel ">
+
+                                            <div class="table-responsive ">
+                                                <table class="table table-hover">
+                                                    <tr class="bg-c-yellow">
+
+                                                        <th>Amount</th>
+                                                        <th>Description</th>
+                                                        <th>Category</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                    <tr>
+                                                        {% for i in new %}
+                                                        <td>{{ i.amount}}</td>
+                                                        <td>{{i.description}}</td>
+                                                        <td>{{i.category}}</td>
+                                                        <td>{{i.date}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- tabs card end -->
+
+                        <!-- social statustic start -->
+                        <div class="col-md-12 col-lg-4 ">
+                            <div class="card ">
+                                <div class="card-block text-center ">
+                                    <i class="fa fa-money text-c-blue d-block f-40 " style="font-size: 37px;"></i>
+                                    <h4 class="m-t-20 "><span class="text-c-blue ">{{total}}2k</span> Expenses</h4>
+                                    <p class="m-b-20 ">Your expense list is growing</p>
+                                    <a href="/list_expense">
+                                    <button class="btn btn-primary btn-sm btn-round ">Manage List</button>
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 ">
+                            <div class="card ">
+                                <div class="card-block text-center ">
+                                    <i class="ti-wallet text-c-green d-block f-40 "></i>
+                                    <h4 class="m-t-20 "><span class="text-c-blgreenue ">{{total_inc}}</span> Income</h4>
+                                    <p class="m-b-20 ">This is what what you earn</p>
+                                    <a href="/list_income">
+                                    <button class="btn btn-success btn-sm btn-round ">Check Income</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 ">
+                            <div class="card ">
+                                <div class="card-block text-center ">
+                                    <i class="fa fa-puzzle-piece text-c-pink d-block f-40 " style="font-size: 37px;"></i>
+                                    <h4 class="m-t-20 "><span class="text-c-blgreenue ">{{balnce_amount}}</span>Current Balance</h4>
+                                    <p class="m-b-20 ">This is your current balace</p>
+                                    <a href="{%if total > total_inc %} /list_income {% else %} /list_expense {% endif %} ">
+                                    <button class="btn btn-danger btn-sm btn-round ">{%if total > total_inc %} Control Expenses {% else %} Enough Money{% endif %} 
+                                  </button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- social statustic end -->
+
+                        <!-- users visite and profile start -->
+                        <div id="go" class="col-md-4 ">
+                            <div class="card user-card ">
+                                <div class="card-header ">
+                                    <h5>Profile</h5>
+                                </div>
+                                <div class="card-block ">
+                                    <div class="usre-image m-b-12">
+                                        <img class="profile-pic" src="{{request.user.profile.profile_image.url}}" alt="Group-user.jpg" >
+                                    </div>
+                                    <h6 class="f-w-600 m-t-25 m-b-10 text-capitalize">{{request.user}}</h6>
+                                    <p class="text-muted ">Active |{{user.id}} | {{user.profile.birth_date}}</p>
+                                    <hr />
+                                    <p class="text-muted m-t-15 ">{{user.profile.bio}}</p>
+                                    
+                                    <p class="m-t-15 text-muted ">Contact : {{user.profile.phone_number}}</p>
+                                    <hr />
+                                    <div class="row justify-content-center user-social-link ">
+                                        <div class="col-auto "><a href="https://www.facebook.com/" target="blank"><i
+                                                    class="fa fa-facebook text-facebook "></i></a></div>
+                                        <div class="col-auto "><a href="https://twitter.com/"><i
+                                                    class="fa fa-twitter text-twitter "></i></a></div>
+                                        <div class="col-auto "><a href="#! "><i
+                                                    class="fa fa-dribbble text-dribbble "></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 ">
+                            <div class="card ">
+                                <div class="card-header ">
+                                    <h5>Income vs Expenses</h5>
+                                    <div class="card-header-right ">
+                                        <ul class="list-unstyled card-option ">
+                                            <li><i class="fa fa-chevron-left "></i></li>
+                                            <li><i class="fa fa-window-maximize full-card "></i></li>
+                                            <li><i class="fa fa-minus minimize-card "></i></li>
+                                            <li><i class="fa fa-refresh reload-card "></i></li>
+                                            <li><i class="fa fa-times close-card "></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block" style="padding: 50px 4px;">
+                                    {% include 'chart/area.html' %}
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- users visite and profile end -->
+
+                    </div>
+                </div>
+
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

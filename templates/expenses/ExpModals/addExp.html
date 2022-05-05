@@ -1,0 +1,46 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Expense</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="POST" action="/add_expense">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="amount" class="col-form-label">Amount:</label>
+                        <input type="text" class="form-control" name="amount" id="amount">
+                    </div>
+                    <div class="mb-3">
+                        <label for="desc" class="col-form-label">Description:</label>
+                        <input type="text" class="form-control" name="desc" id="desc">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="col-form-label">Category:</label>
+                        <select name="category" class="form-control" id="category">
+                            <option name="category" selected disabled>Choose Category</option>
+                            {% for categ in category %}
+                            <option name="category">{{categ}} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date" class="col-form-label">Date:</label>
+                        <input type="date" value=today.date class="form-control" name="date" id="date">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

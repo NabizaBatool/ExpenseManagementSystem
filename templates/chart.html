@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% load static %} {% block title %} Expense Manager {% endblock title %} {% block content %}
+<center>
+    <div class="card " style="width:70% ">
+    {% include 'chart/graph.html' %}
+    </div>
+
+    {% include 'chart/pie-chart.html' %}
+
+    <div>
+        <a class="btn btn-info btn-square" href="/list_expense">Back to List Expense</a>
+
+    </div>
+</center>
+
+
+{% endblock content %}

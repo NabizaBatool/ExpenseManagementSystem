@@ -1,0 +1,9 @@
+
+{% if messages%}
+{% for message in messages %}
+<div  class="alert alert-light bg-c-yellow p-3 ">
+	<button type="button" class="close p-1 m-0" data-dismiss="alert">×</button>
+   {{ message }}
+</div>
+{% endfor %}
+{% endif %}

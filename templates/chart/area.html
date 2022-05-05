@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<style>
+  #area-chart {
+    min-height: 250px;
+  }
+</style>
+
+<div class="col-md-12 text-center">
+  <label class="label label-success">Area Chart</label>
+  <div id="area-chart"></div>
+</div>
+
+<script>
+  var data2 = JSON.parse("{{data2|escapejs}}");
+  var data3 = JSON.parse("{{data3|escapejs}}");
+  function generateSummaryArea() {
+    var mychartData = []
+    for (mohsin in data3) {
+      for (nabiza in data2) {
+        if(data3[mohsin].year==data2[nabiza].year){
+          mychartData[mohsin] = { y: data3[mohsin].year, a: data3[mohsin].sum, b: data2[nabiza].sum }
+        }
+      }
+
+    }
+    return mychartData;
+  }
+
+    
+    config = {
+      data: generateSummaryArea(),
+      xkey: 'y',
+      ykeys: ['a', 'b'],
+      labels: ['Total Expense', 'Total Income'],
+      fillOpacity: 0.6,
+      hideHover: 'auto',
+      behaveLikeLine: true,
+      resize: true,
+      parseTime: false,
+      pointFillColors: ['darkblue'],
+      pointStrokeColors: ['black'],
+      lineColors: ['red', 'skyblue']
+    };
+  config.element = 'area-chart';
+  Morris.Area(config);
+
+</script>

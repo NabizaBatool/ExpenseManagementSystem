@@ -1,0 +1,52 @@
+<!-- Morris Chart js -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<style>
+    #pie-chart {
+        min-height: 100% !important;
+    }
+  
+</style>
+
+ <!-- Donut chart start -->
+ <div class="col-sm-6 col-sm-offset-3 text-center  ">
+    <div id="pie-chart"></div>
+</div>
+
+<!-- Donut chart Ends -->
+
+<script>
+    var data1 = JSON.parse("{{data1|escapejs}}");
+   
+
+   function generateSummaryChart() {
+       // some logic and below object is return 
+       var mychartData =[]
+       for (mohsin in data1) {
+           mychartData[mohsin]  = { label: data1[mohsin].category, value: data1[mohsin].sum }     
+
+       }
+       
+       return mychartData ;
+
+   }
+
+
+   Morris.Donut({
+       element: 'pie-chart',
+       data: generateSummaryChart(),
+       // data: [ 
+       // {label: data1[nab].category , value: data1[nab].sum},
+       // {label:data1[0].category, value: data1[0].sum},
+       // {label:data1[1].category, value: data1[1].sum},
+       // {label:data1[2].category, value: data1[2].sum},
+       // {label:data1[3].category, value: data1[3].sum},
+       // {label:data1[4].category, value: data1[4].sum},
+
+   })
+
+
+</script>

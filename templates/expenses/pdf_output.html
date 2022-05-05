@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PDF</title>
+    <style>
+        @page {
+            size: "A4";
+            margin: 2.5cm;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Expenses Summary</h2>
+    <h3>Total Expenses: {{total_exp}}</h3>
+    <div class="card-block table-border-style ">
+        <div class="table-responsive ">
+            <table class="table table-hover ">
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for exp in expenses %}
+                    <tr>
+                        <td>{{exp.amount}}</td>
+                        <td>{{exp.description}}</td>
+                        <td>{{exp.category}}</td>
+                        <td>{{exp.date}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+</body>
+
+</html>
